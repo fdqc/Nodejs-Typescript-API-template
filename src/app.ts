@@ -3,10 +3,10 @@ dotenv.config();
 import express from 'express';
 import bodyParser from 'body-parser';
 import passport from 'passport';
-import { configRoutes } from './routes';
 import './config/passport';
+import { configRoutes } from './routes';
 import { mongooseErrorHandler, errorHandler } from './middleware/errorHandlerMiddlewares';
-import { initMongo } from './config/mongo';
+import { initMongo } from './connection';
 
 // Connect to MongoDB
 initMongo();
