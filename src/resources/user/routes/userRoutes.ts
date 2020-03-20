@@ -1,7 +1,6 @@
 import express from 'express';
 import * as userController from '../controller/userController';
 import { jwtAuth } from '../../../config/passport';
-import { asyncWrapper } from '../../../shared/utils/utils';
 
 const api = express.Router();
 
