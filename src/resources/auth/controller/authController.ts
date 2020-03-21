@@ -1,35 +1,24 @@
 import { Request, Response } from 'express';
 import { check, validationResult } from 'express-validator';
 import { UserSchema } from '../../user/schema/userSchema';
-import bcrypt from 'bcrypt';
-import * as jwt from 'jwt-simple';
+import { AuthService } from '../../../services/authService';
+import { UserRegisterI } from '../../../interfaces/user';
 
 /**
  * Authenticates and logs in the user in the app
  */
 export const login = async (req: Request, res: Response) => {
-    // Get errors from express-validator
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const foundUserDoc = await UserSchema.find({ email: req.body.email });
+    const { email, password } = req.body;
 
-    if (foundUserDoc.length > 0) {
-        const match = await bcrypt.compare(req.body.password, foundUserDoc[0].get('password'));
+    const authServiceInstance = new AuthService();
+    const token = await authServiceInstance.authenticate(email, password);
 
-        if (match) {
-            const payload = { id: foundUserDoc[0].id };
-            const token = jwt.encode(payload, process.env.JWT_SECRET);
-
-            return res.status(200).json({ token: token });
-        } else {
-            return res.status(400).json({ errors: [{ mgs: 'invalid_credentials' }] });
-        }
-    } else {
-        return res.status(400).json({ errors: [{ mgs: 'user_not_found' }] });
-    }
+    return res.status(200).json({ token: token });
 };
 
 /**
@@ -41,14 +30,12 @@ export const regster = async (req: Request, res: Response) => {
         return res.status(400).json({ errors: errors.array() });
     }
 
-    await UserSchema.create({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-        status: true
-    });
+    const userDTO: UserRegisterI = req.body;
 
-    return res.status(201).json({ msg: 'registered_successfully' });
+    const authServiceInstance = new AuthService();
+    const token = await authServiceInstance.register(userDTO);
+
+    return res.status(201).json({ token: token });
 };
 
 /**
