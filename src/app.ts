@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 import passport from 'passport';
 import './config/passport';
 import { configRoutes } from './routes';
-import { mongooseErrorHandler, errorHandler } from './middleware/errorHandlerMiddlewares';
+import { mongooseErrorHandler, errorHandler, authErrorHandler } from './middleware/errorHandlerMiddlewares';
 import { initMongo } from './connection';
 
 // Connect to MongoDB
@@ -24,6 +24,7 @@ app.use(passport.initialize());
 configRoutes(app);
 
 // Attach error handlers to the app
+app.use(authErrorHandler);
 app.use(mongooseErrorHandler);
 app.use(errorHandler);
 
