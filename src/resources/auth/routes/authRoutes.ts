@@ -21,13 +21,21 @@ const api = express.Router();
  */
 api.post('/auth/login', authController.validate('login'), asyncWrapper(authController.login));
 
+
+/**
+ * @typedef Registration
+ * @property {string} name.required
+ * @property {string} email.required
+ * @property {string} password.required
+ */
+
 /**
  * Registers a user in the app
  * @route POST /auth/register
  * @group Authentication
  * @summary Register
- * @param {Auth.model} auth.body.required - User's credentials
- * @returns {object} 201
+ * @param {Registration.model} registration.body.required - User's data
+ * @returns {object} 201 - token
  * @returns {Error}  default - Unexpected error
  */
 api.post('/auth/register', authController.validate('register'), asyncWrapper(authController.regster));
