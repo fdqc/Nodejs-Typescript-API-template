@@ -53,7 +53,7 @@ const options = {
         }
     },
     basedir: __dirname, // app absolute path
-    files: ['./resources/**/routes/*.js'] // Path to the API handle folder
+    files: ['./routes/*.js'] // Path to the API handle folder
 };
 
 expressSwagger(options);
