@@ -1,6 +1,6 @@
 import passport from 'passport';
 import * as passportJWT from 'passport-jwt';
-import { UserSchema } from '../resources/user/schema/userSchema';
+import { UserSchema } from '../models/userSchema';
 
 const JwtStrategy = passportJWT.Strategy;
 const ExtractJwt = passportJWT.ExtractJwt;

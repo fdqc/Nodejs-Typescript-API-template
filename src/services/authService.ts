@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import * as jwt from 'jwt-simple';
-import { UserSchema } from '../resources/user/schema/userSchema';
+import { UserSchema } from '../models/userSchema';
 import { AuthError } from '../middleware/errorHandlerMiddlewares';
 import { UserRegisterI } from '../interfaces/user';
 

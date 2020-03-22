@@ -1,6 +1,6 @@
 import { Express } from 'express';
-import userRoutes from './resources/user/routes/userRoutes';
-import authRoutes from './resources/auth/routes/authRoutes';
+import userRoutes from './routes/userRoutes';
+import authRoutes from './routes/authRoutes';
 
 /**
  * Config routes for the app
