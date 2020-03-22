@@ -5,15 +5,8 @@ mongoose.Promise = global.Promise;
 /**
  * Config and connect to MongoDB
  */
-export const initMongo = () => {
+export default async () => {
     const mongoPath = process.env.MONGODB_PATH;
-
-    // Connect
-    mongoose.connect(mongoPath, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
-        .catch(error => {
-            // tslint:disable-next-line: no-console
-            console.log('MongoDB connection error: ', error);
-        });
 
     // Event listener on connection open
     mongoose.connection.once('open', () => {
@@ -26,4 +19,14 @@ export const initMongo = () => {
         // tslint:disable-next-line: no-console
         console.log('MongoDB error: ', error);
     });
+
+    // Connect
+    try {
+        const connection = await mongoose.connect(mongoPath, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+
+        return connection;
+    } catch (error) {
+        // tslint:disable-next-line: no-console
+        console.log('MongoDB connection error: ', error);
+    }
 };
