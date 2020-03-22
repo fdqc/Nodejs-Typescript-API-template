@@ -18,7 +18,7 @@ export class AuthError extends Error {
  */
 export const authErrorHandler = (error: AuthError, _req: Request, res: Response, next: NextFunction) => {
     if (error.name === 'auth') {
-        return res.status(400).json({ errors: [{ msg: error.message }] });
+        return res.status(401).json({ errors: [{ msg: error.message }] });
     } else {
         next(error);
     }
