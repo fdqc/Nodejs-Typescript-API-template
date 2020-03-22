@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { check, validationResult } from 'express-validator';
-import { UserSchema } from '../../user/schema/userSchema';
-import { AuthService } from '../../../services/authService';
-import { UserRegisterI } from '../../../interfaces/user';
+import { UserSchema } from '../models/userSchema';
+import { AuthService } from '../services/authService';
+import { UserRegisterI } from '../interfaces/user';
 
 /**
  * Authenticates and logs in the user in the app

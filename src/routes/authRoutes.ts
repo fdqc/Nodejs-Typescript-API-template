@@ -1,6 +1,6 @@
 import express from 'express';
-import * as authController from '../controller/authController';
-import { asyncWrapper } from '../../../shared/utils/utils';
+import * as authController from '../controllers/authController';
+import { asyncWrapper } from '../shared/utils/utils';
 
 const api = express.Router();
 

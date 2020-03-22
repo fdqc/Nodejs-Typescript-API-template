@@ -1,6 +1,6 @@
 import express from 'express';
-import * as userController from '../controller/userController';
-import { jwtAuth } from '../../../config/passport';
+import * as userController from '../controllers/userController';
+import { jwtAuth } from '../config/passport';
 
 const api = express.Router();
 
