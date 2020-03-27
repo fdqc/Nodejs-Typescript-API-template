@@ -18,6 +18,8 @@ type UserDocument = mongoose.Document & {
     status: boolean;
 };
 
+export type UserModelT = mongoose.Model<UserDocument>;
+
 /**
  * Encrypt the password before saving
  */
@@ -31,4 +33,4 @@ userSchema.pre('save', async function (next: any) {
     next();
 });
 
-export const UserSchema = mongoose.model('User', userSchema);
+export const UserModel: UserModelT = mongoose.model('User', userSchema);
