@@ -11,7 +11,8 @@ const userSchema = new mongoose.Schema({
     status: Boolean
 }, { timestamps: true });
 
-export type UserDocument = mongoose.Document & {
+type UserDocument = mongoose.Document & {
+    name: string;
     email: string;
     password: string;
     status: boolean;
