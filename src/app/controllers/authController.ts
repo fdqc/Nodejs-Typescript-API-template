@@ -1,6 +1,7 @@
+import { Container } from 'typedi';
 import { Request, Response } from 'express';
 import { check, validationResult } from 'express-validator';
-import { UserSchema } from '../../models/userSchema';
+import { UserModel } from '../../models/userSchema';
 import { AuthService } from '../../services/authService';
 import { UserRegisterI } from '../../interfaces/user';
 
@@ -15,7 +16,7 @@ export const login = async (req: Request, res: Response) => {
 
     const { email, password } = req.body;
 
-    const authServiceInstance = new AuthService();
+    const authServiceInstance = Container.get(AuthService);
     const token = await authServiceInstance.authenticate(email, password);
 
     return res.status(200).json({ token: token });
@@ -32,7 +33,7 @@ export const regster = async (req: Request, res: Response) => {
 
     const userDTO: UserRegisterI = req.body;
 
-    const authServiceInstance = new AuthService();
+    const authServiceInstance = Container.get(AuthService);
     const token = await authServiceInstance.register(userDTO);
 
     return res.status(201).json({ token: token });
@@ -64,7 +65,7 @@ export function validate(method: string) {
                     .isEmail().withMessage('invalid_email')
                     .custom(async value => {
                         try {
-                            const foundUserDoc = await UserSchema.find({
+                            const foundUserDoc = await UserModel.find({
                                 email: value
                             });
 
