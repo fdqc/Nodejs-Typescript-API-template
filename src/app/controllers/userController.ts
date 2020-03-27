@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { validationResult, param } from 'express-validator';
-import { UserService } from '../services/userService';
+import { UserService } from '../../services/userService';
 
 /**
  * Get the users list
