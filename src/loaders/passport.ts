@@ -1,13 +1,14 @@
 import passport from 'passport';
 import * as passportJWT from 'passport-jwt';
 import { UserModel } from '../models/userSchema';
+import config from '../config/config';
 
 const JwtStrategy = passportJWT.Strategy;
 const ExtractJwt = passportJWT.ExtractJwt;
 
 // Define strategy's options
 const options = {
-    secretOrKey: process.env.JWT_SECRET,
+    secretOrKey: config.jwtSecret,
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
 };
 

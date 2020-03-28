@@ -4,6 +4,7 @@ import * as jwt from 'jwt-simple';
 import { AuthError } from '../middleware/errorHandlerMiddlewares';
 import { UserRegisterI } from '../interfaces/user';
 import { UserModelT } from '../models/userSchema';
+import config from '../config/config';
 
 @Service()
 export class AuthService {
@@ -21,7 +22,7 @@ export class AuthService {
         const match = await bcrypt.compare(password, foundUserDoc.get('password'));
 
         if (!match) { throw new AuthError('invalid_password'); }
-        const token = jwt.encode({ id: foundUserDoc.id }, process.env.JWT_SECRET);
+        const token = jwt.encode({ id: foundUserDoc.id }, config.jwtSecret);
 
         return token;
     }
@@ -38,7 +39,7 @@ export class AuthService {
             status: true
         });
 
-        const token = jwt.encode({ id: createdUser.id }, process.env.JWT_SECRET);
+        const token = jwt.encode({ id: createdUser.id }, config.jwtSecret);
 
         return token;
     }

@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import config from '../config/config';
+
 // Config promises
 mongoose.Promise = global.Promise;
 
@@ -6,7 +8,7 @@ mongoose.Promise = global.Promise;
  * Config and connect to MongoDB
  */
 export default async () => {
-    const mongoPath = process.env.MONGODB_PATH;
+    const mongoPath = config.mongo_path;
 
     // Event listener on connection open
     mongoose.connection.once('open', () => {

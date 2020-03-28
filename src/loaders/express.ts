@@ -4,10 +4,11 @@ import passport from 'passport';
 import './passport';
 import { configRoutes } from '../routes';
 import { mongooseErrorHandler, errorHandler, authErrorHandler } from '../middleware/errorHandlerMiddlewares';
+import config from '../config/config';
 
 export default async (app: Express) => {
     // Config Express app
-    app.set('port', process.env.PORT || 3000);
+    app.set('port', config.port || 3000);
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(passport.initialize());
@@ -45,7 +46,7 @@ export default async (app: Express) => {
             }
         },
         basedir: __dirname, // app absolute path
-        files: ['../routes/*.js'] // Path to the API handle folder
+        files: ['../app/routes/*.js'] // Path to the API handle folder
     };
 
     expressSwagger(options);

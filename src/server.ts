@@ -1,12 +1,8 @@
 import 'reflect-metadata';
-import dotenv from 'dotenv';
-dotenv.config();
+import config from './config/config';
 
 import loaders from './loaders';
 import express from 'express';
-
-const port = process.env.PORT || 3000;
-const environtment = process.env.NODE_ENV || 'development';
 
 const startServer = async () => {
     // Create Express app
@@ -16,11 +12,11 @@ const startServer = async () => {
     await loaders(app);
 
     // Start the server
-    app.listen(port, () => {
+    app.listen(config.port, () => {
         // tslint:disable-next-line: no-console
-        console.log(`Server running at http://localhost:${port} in ${environtment} mode`);
+        console.log(`Server running at http://localhost:${config.port} in ${config.environment} mode`);
         // tslint:disable-next-line: no-console
-        console.log(`API Docs at: http://localhost:${port}/api-docs\n`);
+        console.log(`API Docs at: http://localhost:${config.port}/api-docs\n`);
     });
 };
 
