@@ -33,6 +33,7 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.13",
+    "shiro-trie": "^0.4.9",
     "typedi": "^0.8.0"
   },
   "devDependencies": {
