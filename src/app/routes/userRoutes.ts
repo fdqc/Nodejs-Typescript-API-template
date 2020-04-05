@@ -1,5 +1,6 @@
 import express from 'express';
 import * as userController from '../controllers/userController';
+import * as userPermissionController from '../controllers/userPermissionController';
 import { jwtAuth } from '../../loaders/passport';
 import { asyncWrapper } from '../../shared/utils/utils';
 import { checkPermissions } from '../../middleware/permissionsMiddleware';
@@ -37,6 +38,28 @@ api.get('/users/:id',
     checkPermissions(['users:read']),
     userController.validate('show'),
     asyncWrapper(userController.show)
+);
+
+/**
+ * @typedef StorePermissions
+ * @property {Array<string>} permissions.required
+ */
+
+/**
+ * Updates user's permissions
+ * @route PUT /users/{id}/permissions
+ * @group Users
+ * @summary Updates permissions
+ * @param {string} id.path.required - provide a user Id
+ * @param {StorePermissions.model} store_permissions.body.required - List of permissions
+ * @returns {object} 200
+ * @returns {Error}  default - Unexpected error
+ * @security JWT
+ */
+api.put('/users/:id/permissions',
+    checkPermissions(['users:write']),
+    userPermissionController.validate('update'),
+    asyncWrapper(userPermissionController.update)
 );
 
 export = api;
