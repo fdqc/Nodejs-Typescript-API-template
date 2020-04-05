@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
         unique: true
     },
     password: String,
+    permissions: [String],
     status: Boolean
 }, { timestamps: true });
 
@@ -16,6 +17,7 @@ type UserDocument = mongoose.Document & {
     name: string;
     email: string;
     password: string;
+    permissions: string[];
     status: boolean;
 };
 
