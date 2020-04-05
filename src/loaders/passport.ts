@@ -18,7 +18,8 @@ passport.use(new JwtStrategy(options, async function (payload, done) {
 
     if (foundUserDoc) {
         return done(null, {
-            id: foundUserDoc.id
+            id: foundUserDoc.id,
+            permissions: foundUserDoc.get('permissions')
         });
     } else {
         return done(new Error('user_not_found'), false);
