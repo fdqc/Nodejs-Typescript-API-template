@@ -22,7 +22,10 @@ export class AuthService {
         const match = await bcrypt.compare(password, foundUserDoc.get('password'));
 
         if (!match) { throw new AuthError('invalid_password'); }
-        const token = jwt.encode({ id: foundUserDoc.id }, config.jwtSecret);
+        const token = jwt.encode({
+            id: foundUserDoc.id,
+            permissions: foundUserDoc.get('permissions')
+        }, config.jwtSecret);
 
         return token;
     }
@@ -39,7 +42,10 @@ export class AuthService {
             status: true
         });
 
-        const token = jwt.encode({ id: createdUser.id }, config.jwtSecret);
+        const token = jwt.encode({
+            id: createdUser.id,
+            permissions: createdUser.get('permissions')
+        }, config.jwtSecret);
 
         return token;
     }
