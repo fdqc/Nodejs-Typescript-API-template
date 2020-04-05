@@ -2,8 +2,14 @@ import express from 'express';
 import * as userController from '../controllers/userController';
 import { jwtAuth } from '../../loaders/passport';
 import { asyncWrapper } from '../../shared/utils/utils';
+import { checkPermissions } from '../../middleware/permissionsMiddleware';
 
 const api = express.Router();
+
+/**
+ * Use passport authenticate on routes
+ */
+api.use('/users', jwtAuth());
 
 /**
  * Obtains a list of the registered users
@@ -14,7 +20,7 @@ const api = express.Router();
  * @returns {Error}  default - Unexpected error
  * @security JWT
  */
-api.get('/users', jwtAuth(), asyncWrapper(userController.users));
+api.get('/users', checkPermissions(['users:read']), asyncWrapper(userController.users));
 
 /**
  * Obtains info about a particular user
@@ -26,9 +32,11 @@ api.get('/users', jwtAuth(), asyncWrapper(userController.users));
  * @returns {Error}  default - Unexpected error
  * @security JWT
  *
- * @todo: try to find other way of handling auth and validate middleware
- * as they are optionals
  */
-api.get('/users/:id', [jwtAuth(), userController.validate('show'), asyncWrapper(userController.show)]);
+api.get('/users/:id',
+    checkPermissions(['users:read']),
+    userController.validate('show'),
+    asyncWrapper(userController.show)
+);
 
 export = api;
