@@ -24,7 +24,15 @@ export default async () => {
 
     // Connect
     try {
-        const connection = await mongoose.connect(mongoPath, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+        const connection = await mongoose.connect(
+            mongoPath,
+            {
+                useNewUrlParser: true,
+                useCreateIndex: true,
+                useFindAndModify: false,
+                useUnifiedTopology: true
+            }
+        );
 
         return connection;
     } catch (error) {
