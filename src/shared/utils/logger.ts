@@ -7,15 +7,20 @@ const { combine, timestamp, printf } = format;
  * @todo: add the error stack to the logs
  */
 // tslint:disable-next-line: no-shadowed-variable
-const customFormat = printf(({ level, message, timestamp }) => {
+const storageFormat = printf(({ level, message, timestamp }) => {
     return `${timestamp}: level: ${level}, message: ${message}`;
+});
+
+// tslint:disable-next-line: no-shadowed-variable
+const consoleFormat = printf(({ level, message }) => {
+    return `${level}: ${message}`;
 });
 
 export const log = createLogger({
     level: 'info',
     format: combine(
         timestamp(),
-        customFormat
+        storageFormat
     ),
     transports: [
         // - Write all logs with level `error` and below to `error.log`
@@ -29,8 +34,8 @@ if (config.environment !== 'production') {
     log.add(new transports.Console({
         level: 'silly',
         format: combine(
-            timestamp(),
-            customFormat
+            format.simple(),
+            consoleFormat
         )
     }));
 }
