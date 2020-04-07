@@ -3,6 +3,7 @@ import config from './config/config';
 
 import loaders from './loaders';
 import express from 'express';
+import { log } from './shared/utils/logger';
 
 const startServer = async () => {
     // Create Express app
@@ -13,10 +14,10 @@ const startServer = async () => {
 
     // Start the server
     app.listen(config.port, () => {
-        // tslint:disable-next-line: no-console
-        console.log(`Server running at http://localhost:${config.port} in ${config.environment} mode`);
-        // tslint:disable-next-line: no-console
-        console.log(`API Docs at: http://localhost:${config.port}/api-docs\n`);
+        log.silly(`Server running at http://localhost:${config.port} in ${config.environment} mode`);
+        log.silly(`API Docs at: http://localhost:${config.port}/api-docs\n`);
+
+        if (config.environment === 'production') { log.info('Server is up'); }
     });
 };
 

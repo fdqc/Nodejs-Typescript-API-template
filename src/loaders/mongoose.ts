@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import config from '../config/config';
+import { log, metaTags } from '../shared/utils/logger';
 
 // Config promises
 mongoose.Promise = global.Promise;
@@ -12,14 +13,14 @@ export default async () => {
 
     // Event listener on connection open
     mongoose.connection.once('open', () => {
-        // tslint:disable-next-line: no-console
-        console.log('Connected to MongoDB');
+        log.silly('Connected to MongoDB');
+
+        if (config.environment === 'production') { log.info('Connected to MongoDB'); }
     });
 
     // Event listener on error
     mongoose.connection.on('error', (error) => {
-        // tslint:disable-next-line: no-console
-        console.log('MongoDB error: ', error);
+        log.error('MongoDB error: ' + error, { tag: metaTags.MONGODB, error: error});
     });
 
     // Connect
@@ -36,7 +37,6 @@ export default async () => {
 
         return connection;
     } catch (error) {
-        // tslint:disable-next-line: no-console
-        console.log('MongoDB connection error: ', error);
+        log.error('MongoDB connection error: ' + error, { tag: metaTags.MONGODB, error: error });
     }
 };
