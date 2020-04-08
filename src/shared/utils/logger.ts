@@ -1,26 +1,17 @@
 import config from '../../config/config';
 import { createLogger, format, transports} from 'winston';
-const { combine, timestamp, printf } = format;
-
-/**
- * Custom Format
- * @todo: add the error stack to the logs
- */
-// tslint:disable-next-line: no-shadowed-variable
-const storageFormat = printf(({ level, message, timestamp }) => {
-    return `${timestamp}: level: ${level}, message: ${message}`;
-});
+const { combine, timestamp, printf, json } = format;
 
 // tslint:disable-next-line: no-shadowed-variable
-const consoleFormat = printf(({ level, message }) => {
-    return `${level}: ${message}`;
+const consoleFormat = printf(({ level, message, stack }) => {
+    return `${level}: ${message} ${stack ? stack : ''}`;
 });
 
 export const log = createLogger({
     level: 'info',
     format: combine(
         timestamp(),
-        storageFormat
+        json()
     ),
     transports: [
         // - Write all logs with level `error` and below to `error.log`
