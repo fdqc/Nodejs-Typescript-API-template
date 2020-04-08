@@ -19,7 +19,7 @@ export class AuthError extends Error {
  */
 export const authErrorHandler = (error: AuthError, _req: Request, res: Response, next: NextFunction) => {
     if (error.name === 'auth') {
-        log.error('Authentication error: ' + error , { tag: metaTags.AUTHENTICATION, error: error });
+        log.error('Authentication error', { tag: metaTags.AUTHENTICATION, stack: error.stack });
         return res.status(401).json({ errors: [{ msg: error.message }] });
     } else {
         next(error);
@@ -32,7 +32,7 @@ export const authErrorHandler = (error: AuthError, _req: Request, res: Response,
  */
 export const mongooseErrorHandler = (error: CastError, _req: Request, res: Response, next: NextFunction) => {
     if (error.kind === 'ObjectId') {
-        log.error('MongoDB error: ' + error, { tag: metaTags.MONGODB, error: error });
+        log.error('MongoDB error ', { tag: metaTags.MONGODB, stack: error.stack });
         return res.status(400).json({ errors: [{ msg: 'resource_not_found' }] });
     } else {
         next(error);
@@ -43,6 +43,6 @@ export const mongooseErrorHandler = (error: CastError, _req: Request, res: Respo
  * General error handler
  */
 export const errorHandler = (error: any, _req: Request, res: Response, _next: NextFunction) => {
-    log.error('Unexpected error: ' + error, { tag: metaTags.UNEXPECTED, error: error });
+    log.error('Unexpected error ', { tag: metaTags.UNEXPECTED, stack: error.stack });
     return res.status(500).json({ errors: [{ msg: 'unexpected_error' }] });
 };

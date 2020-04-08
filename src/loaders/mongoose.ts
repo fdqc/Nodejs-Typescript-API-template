@@ -20,7 +20,7 @@ export default async () => {
 
     // Event listener on error
     mongoose.connection.on('error', (error) => {
-        log.error('MongoDB error: ' + error, { tag: metaTags.MONGODB, error: error});
+        log.error('MongoDB error', { tag: metaTags.MONGODB, stack: error.stack});
     });
 
     // Connect
@@ -37,6 +37,6 @@ export default async () => {
 
         return connection;
     } catch (error) {
-        log.error('MongoDB connection error: ' + error, { tag: metaTags.MONGODB, error: error });
+        log.error('MongoDB connection error', { tag: metaTags.MONGODB, stack: error.stack });
     }
 };
