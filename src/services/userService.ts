@@ -9,10 +9,10 @@ export class UserService {
      * Gets all users
      */
     public async usersList() {
-        const foundUserDoc = await this.userModel.find()
+        const foundUsersDocs = await this.userModel.find()
             .select('name email status');
 
-        return foundUserDoc;
+        return foundUsersDocs;
     }
 
     /**
