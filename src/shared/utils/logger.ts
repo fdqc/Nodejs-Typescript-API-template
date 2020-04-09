@@ -36,6 +36,7 @@ if (config.environment !== 'production') {
  */
 export enum metaTags {
     MONGODB = 'MONGODB',
+    MONGOOSE = 'MONGOOSE',
     AUTHENTICATION = 'AUTHENTICATION',
     UNEXPECTED = 'UNEXPECTED'
 }
