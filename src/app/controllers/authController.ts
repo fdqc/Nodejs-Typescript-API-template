@@ -50,10 +50,10 @@ export function validate(method: string) {
         case 'login': {
             validations = [
                 check('email').exists().withMessage('email_required')
-                    .not().isEmpty().withMessage('email_can_not_be_empty')
+                    .not().isEmpty().withMessage('email_cannot_be_empty')
                     .isEmail().withMessage('invalid_email'),
                 check('password').exists().withMessage('password_required')
-                    .not().isEmpty().withMessage('password_can_not_be_empty')
+                    .not().isEmpty().withMessage('password_cannot_be_empty')
                     .isLength({ min: 5 }).withMessage('password_min_length_5')
             ];
             break;
@@ -61,7 +61,7 @@ export function validate(method: string) {
         case 'register': {
             validations = [
                 check('email').exists().withMessage('email_required')
-                    .not().isEmpty().withMessage('email_can_not_be_empty')
+                    .not().isEmpty().withMessage('email_cannot_be_empty')
                     .isEmail().withMessage('invalid_email')
                     .custom(async value => {
                         try {
@@ -79,7 +79,7 @@ export function validate(method: string) {
                         }
                     }),
                 check('password').exists().withMessage('password_required')
-                    .not().isEmpty().withMessage('password_can_not_be_empty')
+                    .not().isEmpty().withMessage('password_cannot_be_empty')
                     .isLength({ min: 5 }).withMessage('password_min_length_5')
             ];
             break;
