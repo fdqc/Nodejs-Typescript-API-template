@@ -4,7 +4,8 @@ import passport from 'passport';
 import cors from 'cors';
 import './passport';
 import { configRoutes } from '../routes';
-import { mongooseErrorHandler, errorHandler, authErrorHandler } from '../middleware/errorHandlerMiddlewares';
+import { mongooseErrorHandler, errorHandler,
+    authErrorHandler, mongoErrorHandler } from '../middleware/errorHandlerMiddlewares';
 import config from '../config/config';
 
 export default async (app: Express) => {
@@ -27,6 +28,7 @@ export default async (app: Express) => {
     // Attach error handlers to the app
     app.use(authErrorHandler);
     app.use(mongooseErrorHandler);
+    app.use(mongoErrorHandler);
     app.use(errorHandler);
 
     // Config express-swagger-generator
