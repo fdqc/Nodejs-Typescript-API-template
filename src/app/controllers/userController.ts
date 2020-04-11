@@ -25,7 +25,8 @@ export const show = async (req: Request, res: Response) => {
     const userServiceInstance =  Container.get(UserService);
     const user = await userServiceInstance.getUser(req.params.id);
 
-    return user ? res.status(200).json(user) : res.status(404).json({ errors: [{ msg: 'user_not_found' }] });
+    return user ? res.status(200).json(user) :
+        res.status(404).json({ errors: [{ msg: 'user_not_found' }] });
 };
 
 /**
