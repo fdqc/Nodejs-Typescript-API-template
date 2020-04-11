@@ -28,4 +28,30 @@ export class PermissionService {
 
         return;
     }
+
+    /**
+     * Update a permission
+     * @param permissionId string
+     * @param permission PermissionI
+     */
+    public async update(permissionId: string, permission: PermissionI) {
+        const updatedPermissionDoc = await this.permissionModel.findByIdAndUpdate(
+            permissionId,
+            {
+                description: permission.description,
+                value: permission.value,
+                sub_levels: permission.sub_levels
+            });
+
+        return updatedPermissionDoc ? true : false;
+    }
+
+    /**
+     * Removes a permission
+     * @param permissionId string
+     */
+    public async remove(permissionId: string) {
+        const removedPermissionDoc = await this.permissionModel.findByIdAndDelete(permissionId);
+        return removedPermissionDoc ? true : false;
+    }
 }

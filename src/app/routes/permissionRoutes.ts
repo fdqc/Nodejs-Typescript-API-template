@@ -51,4 +51,37 @@ api.post('/permissions',
     asyncWrapper(permissionController.store)
 );
 
+/**
+ * Updates a permission
+ * @route PUT /permissions/{id}
+ * @group Permissions
+ * @summary Updates a permission
+ * @param {string} id.path.required - provide a permission Id
+ * @param {StorePermission.model} store_permission.body.required
+ * @returns {object} 200
+ * @returns {Error}  default - Unexpected error
+ * @security JWT
+ */
+api.put('/permissions/:id',
+    checkPermissions(['permissions:write']),
+    permissionController.validate('update'),
+    asyncWrapper(permissionController.update)
+);
+
+/**
+ * Deletes a permission
+ * @route DELETE /permissions/{id}
+ * @group Permissions
+ * @summary Deletes a permission
+ * @param {string} id.path.required - provide a permission Id
+ * @returns {object} 200
+ * @returns {Error}  default - Unexpected error
+ * @security JWT
+ */
+api.delete('/permissions/:id',
+    checkPermissions(['permissions:write']),
+    permissionController.validate('remove'),
+    asyncWrapper(permissionController.remove)
+);
+
 export = api;
