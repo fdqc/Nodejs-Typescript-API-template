@@ -19,9 +19,9 @@ In the root of the project you'll find .env configuration file. This is where yo
 
 ### TODO:
 - ~~Add CORS middleware~~
-- Add permission system
+- ~~Add permission system~~
 - Add decorators
-- Add winston
+- ~~Add winston~~
 - Add SocketIO
 - Add test cases
 - Add support for MySQL
