@@ -29,7 +29,7 @@ const promiseShouldFail = (promise: Promise<any>) => {
 };
 
 before('##Start MongoMemoryServer', async () => {
-    mongoServer = new MongoMemoryServer();
+    mongoServer = new MongoMemoryServer({ binary: { version: '4.2.5' } });
     const mongoUri = await mongoServer.getUri();
     await mongoose.connect(mongoUri, opt);
 });
