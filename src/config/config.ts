@@ -23,5 +23,10 @@ export default {
                 callback(new Error('not_allowed_by_CORS'));
             }
         }
+    },
+    routePrefix: '/api/v1',
+    agenda: {
+        collection: process.env.AGENDA_COLLECTION || 'agendaJobs',
+        isEnabled: process.env.AGENDA_ENABLE || false
     }
 };
