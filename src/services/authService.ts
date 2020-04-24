@@ -5,6 +5,7 @@ import { AuthError } from '../middleware/errorHandlerMiddlewares';
 import { UserRegisterI } from '../interfaces/user';
 import { UserModelT } from '../models/userSchema';
 import config from '../config/config';
+import moment from 'moment';
 
 @Service()
 export class AuthService {
@@ -24,7 +25,8 @@ export class AuthService {
         if (!match) { throw new AuthError('invalid_password'); }
         const token = jwt.encode({
             id: foundUserDoc.id,
-            permissions: foundUserDoc.get('permissions')
+            permissions: foundUserDoc.get('permissions'),
+            exp: moment().add(24, 'hours').unix()
         }, config.jwtSecret);
 
         return token;
@@ -44,7 +46,8 @@ export class AuthService {
 
         const token = jwt.encode({
             id: createdUser.id,
-            permissions: createdUser.get('permissions')
+            permissions: createdUser.get('permissions'),
+            exp: moment().add(24, 'hours').unix()
         }, config.jwtSecret);
 
         return token;

@@ -16,14 +16,8 @@ const options = {
 passport.use(new JwtStrategy(options, async function (payload, done) {
     const foundUserDoc = await UserModel.findById(payload.id);
 
-    if (foundUserDoc) {
-        return done(null, {
-            id: foundUserDoc.id,
-            permissions: foundUserDoc.get('permissions')
-        });
-    } else {
-        return done(new Error('user_not_found'), false);
-    }
+    if (foundUserDoc) { return done(null, payload); }
+    return done(new Error('user_not_found'), false);
 }));
 
 /**
