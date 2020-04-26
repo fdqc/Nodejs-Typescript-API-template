@@ -37,6 +37,9 @@ export class AuthService {
      * @param user UserRegisterI
      */
     public async register(user: UserRegisterI) {
+        const salt = await bcrypt.genSalt(config.saltRounds);
+        user.password = await bcrypt.hash(user.password, salt);
+
         const createdUser = await this.userModel.create({
             name: user.name,
             email: user.email,
