@@ -1,6 +1,6 @@
 import { Container } from 'typedi';
 import { UserModel } from '../models/userSchema';
-import { PermissionModel } from '../models/PermissionSchema';
+import { PermissionModel } from '../models/permissionSchema';
 import Agenda from 'agenda';
 
 export default (agenda: Agenda) => {

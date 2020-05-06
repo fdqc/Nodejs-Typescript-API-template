@@ -24,7 +24,7 @@ export class AuthService {
 
         if (!match) { throw new AuthError('invalid_password'); }
         const token = jwt.encode({
-            id: foundUserDoc.id,
+            _id: foundUserDoc.id,
             permissions: foundUserDoc.get('permissions'),
             exp: moment().add(24, 'hours').unix()
         }, config.jwtSecret);
@@ -48,7 +48,7 @@ export class AuthService {
         });
 
         const token = jwt.encode({
-            id: createdUser.id,
+            _id: createdUser.id,
             permissions: createdUser.get('permissions'),
             exp: moment().add(24, 'hours').unix()
         }, config.jwtSecret);

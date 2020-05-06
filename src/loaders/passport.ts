@@ -14,7 +14,7 @@ const options = {
 
 // Configure passport with JwtStrategy
 passport.use(new JwtStrategy(options, async function (payload, done) {
-    const foundUserDoc = await UserModel.findById(payload.id);
+    const foundUserDoc = await UserModel.findById(payload._id);
 
     if (foundUserDoc) { return done(null, payload); }
     return done(new Error('user_not_found'), false);

@@ -1,6 +1,6 @@
 import { Container } from 'typedi';
 import { Request, Response } from 'express';
-import { PermissionService } from '../../services/PermissionService';
+import { PermissionService } from '../../services/permissionService';
 import { PermissionI } from '../../interfaces/permission';
 import { validationResult, check, param } from 'express-validator';
 import { isShiroRootLvl, isShiro } from '../../shared/utils/utils';

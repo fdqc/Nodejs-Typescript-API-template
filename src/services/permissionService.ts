@@ -1,5 +1,5 @@
 import { Service, Inject } from 'typedi';
-import { PermissionModelT } from '../models/PermissionSchema';
+import { PermissionModelT } from '../models/permissionSchema';
 import { PermissionI } from '../interfaces/permission';
 
 @Service()
