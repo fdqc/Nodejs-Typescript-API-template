@@ -56,7 +56,7 @@ export const getNetInterfaces = () => {
                 // this single interface has multiple ipv4 addresses
                 netInterfaces.push(iface.address);
             } else {
-                // this interface has only one ipv4 adress
+                // this interface has only one ipv4 address
                 netInterfaces.push(iface.address);
             }
             ++alias;
