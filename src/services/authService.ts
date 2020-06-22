@@ -1,11 +1,10 @@
 import { Service, Inject } from 'typedi';
 import bcrypt from 'bcrypt';
-import * as jwt from 'jwt-simple';
+import jwt from 'jsonwebtoken';
 import { AuthError } from '../middleware/errorHandlerMiddlewares';
 import { UserRegisterI } from '../interfaces/user';
 import { UserModelT } from '../models/userSchema';
 import config from '../config/config';
-import moment from 'moment';
 
 @Service()
 export class AuthService {
@@ -23,11 +22,10 @@ export class AuthService {
         const match = await bcrypt.compare(password, foundUserDoc.get('password'));
 
         if (!match) { throw new AuthError('invalid_password'); }
-        const token = jwt.encode({
+        const token = jwt.sign({
             _id: foundUserDoc.id,
-            permissions: foundUserDoc.get('permissions'),
-            exp: moment().add(24, 'hours').unix()
-        }, config.jwtSecret);
+            permissions: foundUserDoc.get('permissions')
+        }, config.jwtSecret, { expiresIn: '24h' });
 
         return token;
     }
@@ -47,11 +45,10 @@ export class AuthService {
             status: true
         });
 
-        const token = jwt.encode({
+        const token = jwt.sign({
             _id: createdUser.id,
-            permissions: createdUser.get('permissions'),
-            exp: moment().add(24, 'hours').unix()
-        }, config.jwtSecret);
+            permissions: createdUser.get('permissions')
+        }, config.jwtSecret, { expiresIn: '24h' });
 
         return token;
     }
