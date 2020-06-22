@@ -57,6 +57,19 @@ describe('#AuthService', () => {
             token.should.be.string;
         });
 
+        it('Should create a user with no name and return a token', async () => {
+            const newUser: UserRegisterI = {
+                name: undefined,
+                email: 'unnamed@test.com',
+                password: 'securepassword'
+            };
+
+            const authServiceInstance = new AuthService(UserModel);
+            const token = await authServiceInstance.register(newUser);
+
+            token.should.be.string;
+        });
+
         it('Should throw an error using existing email', async () => {
             const newUser: UserRegisterI = {
                 name: 'test user',

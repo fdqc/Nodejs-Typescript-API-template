@@ -15,7 +15,7 @@ describe('#Middleware', () => {
             const res = httpMocks.createResponse();
             const nextSpy = sinon.spy();
 
-            req.user = { permissions: ['root:*', 'other:*'] };
+            req.user = { _id: '', permissions: ['root:*', 'other:*'] };
 
             middleware(req, res, nextSpy);
             nextSpy.calledOnce.should.be.true;
@@ -28,7 +28,7 @@ describe('#Middleware', () => {
             const res = httpMocks.createResponse();
             const nextSpy = sinon.spy();
 
-            req.user = { permissions: ['root:read', 'other:*'] };
+            req.user = { _id: '', permissions: ['root:read', 'other:*'] };
 
             middleware(req, res, nextSpy);
             nextSpy.calledOnce.should.be.true;
@@ -42,7 +42,7 @@ describe('#Middleware', () => {
             const res = httpMocks.createResponse();
             const nextSpy = sinon.spy();
 
-            req.user = { permissions: ['root:read', 'other:*'] };
+            req.user = { _id: '', permissions: ['root:read', 'other:*'] };
 
             middleware(req, res, nextSpy);
             nextSpy.calledOnce.should.be.true;
@@ -55,7 +55,7 @@ describe('#Middleware', () => {
             const res = httpMocks.createResponse();
             const nextSpy = sinon.spy();
 
-            req.user = { permissions: ['root:read', 'other:*'] };
+            req.user = { _id: '', permissions: ['root:read', 'other:*'] };
 
             try {
                 middleware(req, res, nextSpy);
@@ -72,7 +72,7 @@ describe('#Middleware', () => {
             const res = httpMocks.createResponse();
             const nextSpy = sinon.spy();
 
-            req.user = { permissions: ['root:read', 'other:read'] };
+            req.user = { _id: '', permissions: ['root:read', 'other:read'] };
 
             try {
                 middleware(req, res, nextSpy);
