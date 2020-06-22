@@ -15,7 +15,7 @@ type UserDocument = mongoose.Document & {
     name: string;
     email: string;
     password: string;
-    permissions: string[];
+    permissions?: string[];
     status: boolean;
 };
 
