@@ -17,11 +17,16 @@ api.use('/users', jwtAuth());
  * @route GET /users
  * @group Users
  * @summary Returns a list of users
+ * @param {number} page.query - default: 0
+ * @param {number} page_size.query - default: 10
  * @returns {object} 200
  * @returns {Error}  default - Unexpected error
  * @security JWT
  */
-api.get('/users', checkPermissions(['users:read']), asyncWrapper(userController.users));
+api.get('/users',
+    checkPermissions(['users:read']),
+    userController.validate('usersList'),
+    asyncWrapper(userController.users));
 
 /**
  * Obtains info about a particular user

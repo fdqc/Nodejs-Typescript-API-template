@@ -8,11 +8,17 @@ export class UserService {
     /**
      * Gets all users
      */
-    public async usersList() {
-        const foundUsersDocs = await this.userModel.find()
-            .select('name email status');
+    public async usersList(page: string, page_size: string) {
+        const limit = parseInt(page_size, 10);
+        const skip = parseInt(page, 10) * limit;
 
-        return foundUsersDocs;
+        const totalResults = await this.userModel.countDocuments();
+        const foundUsersDocs = await this.userModel.find()
+            .select('name email status')
+            .skip(skip)
+            .limit(limit);
+
+        return { totalResults, users: foundUsersDocs };
     }
 
     /**
