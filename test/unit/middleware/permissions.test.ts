@@ -4,7 +4,7 @@ chai.should();
 
 import sinon from 'sinon';
 import * as httpMocks from 'node-mocks-http';
-import { checkPermissions } from '../../src/middleware/permissionsMiddleware';
+import { checkPermissions } from '../../../src/middleware/permissionsMiddleware';
 
 describe('#Middleware', () => {
     describe('-checkPermissions()', () => {

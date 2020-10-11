@@ -21,7 +21,6 @@ const api = express.Router();
  */
 api.post('/auth/login', authController.validate('login'), asyncWrapper(authController.login));
 
-
 /**
  * @typedef Registration
  * @property {string} name.required

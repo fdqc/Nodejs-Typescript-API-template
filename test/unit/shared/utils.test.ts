@@ -2,7 +2,7 @@ import 'mocha';
 import chai from 'chai';
 chai.should();
 
-import { isShiroRootLvl, isShiro } from '../../src/shared/utils/utils';
+import { isShiroRootLvl, isShiro } from '../../../src/shared/utils/utils';
 
 describe('#Utils test', () => {
     describe('-isShiroRootLvl()', () => {

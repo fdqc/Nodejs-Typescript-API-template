@@ -1,7 +1,7 @@
 import 'mocha';
-import { UserRegisterI } from '../../src/interfaces/user';
-import { AuthService } from '../../src/services/authService';
-import { UserModel } from '../../src/models/userSchema';
+import { UserRegisterI } from '../../../src/interfaces/user';
+import { AuthService } from '../../../src/services/authService';
+import { UserModel } from '../../../src/models/userSchema';
 import chai from 'chai';
 chai.should();
 
