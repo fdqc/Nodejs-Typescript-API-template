@@ -28,7 +28,7 @@
     "express-swagger-generator": "^1.1.17",
     "express-validator": "^6.4.0",
     "jwt-simple": "^0.5.6",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "moment": "^2.24.0",
     "mongoose": "^5.9.4",
     "passport": "^0.4.1",
