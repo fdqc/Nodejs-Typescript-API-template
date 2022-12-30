@@ -55,7 +55,7 @@
     "@types/sinon": "^9.0.0",
     "chai": "^4.2.0",
     "concurrently": "^5.1.0",
-    "mocha": "^7.1.1",
+    "mocha": "^10.2.0",
     "mongodb-memory-server-core": "^6.5.2",
     "node-mocks-http": "^1.8.1",
     "nodemon": "^2.0.2",
