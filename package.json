@@ -32,7 +32,7 @@
     "moment": "^2.24.0",
     "mongoose": "^5.9.4",
     "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0",
+    "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.1.13",
     "shiro-trie": "^0.4.9",
     "typedi": "^0.8.0",
